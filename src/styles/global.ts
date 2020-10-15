@@ -11,6 +11,6 @@ export default createGlobalStyle`
     background: none;
     border: none;
     outline: none;
-    /* font-family:  */
+    font-family: Poppins
   }
 `
