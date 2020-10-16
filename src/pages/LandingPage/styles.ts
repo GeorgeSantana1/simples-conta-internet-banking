@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   > header {
@@ -34,8 +35,9 @@ export const AppTitle = styled.div`
   user-select: none;
 `
 
-export const SignInButton = styled.div`
+export const SignInButton = styled(Link)`
   display: flex;
+  text-decoration: none;
   align-items: center;
   justify-content: center;
   padding: 5px 0;
@@ -55,8 +57,9 @@ export const SignInButton = styled.div`
   }
 `
 
-export const RegisterButton = styled.div`
+export const RegisterButton = styled(Link)`
   display: flex;
+  text-decoration: none;
   align-items: center;
   justify-content: center;
   padding: 5px 0;
@@ -96,7 +99,7 @@ export const PresentationContainer = styled.div`
       }
     }
 
-    > button {
+    > a {
       background: #339ED0;
       margin-top: 15px;
       padding: 10px;
@@ -107,6 +110,7 @@ export const PresentationContainer = styled.div`
       box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
       cursor: pointer;
       transition: 0.3s;
+      text-decoration: none;
 
       :hover {
         opacity: 0.7;
@@ -130,7 +134,7 @@ export const PresentationContainer = styled.div`
         font-size: 30px;
       }
 
-      > button {
+      > a {
         align-self: flex-start
       }
     }

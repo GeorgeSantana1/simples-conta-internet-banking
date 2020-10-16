@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   Container,
@@ -17,10 +18,10 @@ const LandingPage: React.FC = () => {
         <AppTitle>Simples Conta</AppTitle>
 
         <div className="buttons-container">
-          <SignInButton>
+          <SignInButton to="/auth">
             Entrar
           </SignInButton>
-          <RegisterButton>
+          <RegisterButton to="/">
             Cadastro
           </RegisterButton>
         </div>
@@ -34,9 +35,9 @@ const LandingPage: React.FC = () => {
             <span> acelerar</span> o seu negócio
           </h1>
 
-          <button>
+          <Link to="/auth">
             ABRIR MINHA CONTA PJ
-          </button>
+          </Link>
         </div>
 
         <img src={landingPageAnimation} alt="Revenue"/>
