@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Input from '../../components/Input'
-import { Link } from 'react-router-dom'
+import { cnpjMask } from '../../utils/masks'
 
 import {
   Container,
@@ -10,27 +10,42 @@ import {
 } from './styles'
 
 const Login: React.FC = () => {
+  const [name, setName] = useState('')
+  const [cnpj, setCnpj] = useState('')
+
+  function maskCnpj(cnpj: string) {
+    setCnpj(cnpjMask(cnpj))
+  }
+
   return (
     <Container>
       <PresentationContainer>
+        <h1 className="app-title">Simples Conta</h1>
         <div>
           <h1>
-            Conta PJ
-            desenvolvida para
-            <span> acelerar</span> o seu negócio
+            Você está a poucos
+            passos de uma nova
+            <strong> experiência financeira</strong>
           </h1>
-
-          <Link to="/">
-            ABRIR MINHA CONTA PJ
-          </Link>
         </div>
       </PresentationContainer>
 
       <InputContainer>
-        <h1>Cadastro</h1>
-        <Input name="name" label="Nome" />
-        <Input name="email" label="Email" />
-        <Input name="password" label="Senha" />
+        <h1>Entrar</h1>
+        <Input
+          name="name"
+          label="Nome da empresa"
+        />
+        <Input
+          name="cnpj"
+          label="CNPJ"
+          value={cnpj}
+          onChange={e => maskCnpj(e.target.value)}
+        />
+        <Input
+          name="password"
+          label="Senha"
+        />
       </InputContainer>
     </Container>
   )

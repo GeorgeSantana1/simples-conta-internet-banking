@@ -2,10 +2,18 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  width: 100vw;
   height: 100vh;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 30px;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-top: 0;
+  }
 `
 
 export const PresentationContainer = styled.div`
@@ -13,7 +21,14 @@ export const PresentationContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+
+  .app-title {
+    font-size: 35px;
+    font-weight: lighter;
+    margin-bottom: 20px;
+
+    user-select: none;
+  }
 
   > div {
     width: 70%;
@@ -23,41 +38,31 @@ export const PresentationContainer = styled.div`
     justify-content: center;
 
     > h1 {
-      font-size: 25px;
+      font-size: 20px;
+      font-weight: 200;
       text-align: center;
       line-height: 30px;
+      margin-bottom: 30px;
 
-      > span {
+      > strong {
         color: #339ED0;
       }
     }
-
-    > a {
-      background: #339ED0;
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-      font-size: 17px;
-      box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
-
-      :hover {
-        opacity: 0.7;
-      }
-    }
-  }
-
-  > img {
-    margin-top: 20px;
   }
 
   @media (min-width: 800px) {
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 10px;
+    justify-content: center;
+
+    .app-title {
+      font-size: 35px;
+      font-weight: lighter;
+      margin-bottom: 20px;
+      align-self: flex-start;
+
+      user-select: none;
+    }
     
     > div {
       width: 350px;
@@ -66,14 +71,6 @@ export const PresentationContainer = styled.div`
         text-align: left;
         font-size: 30px;
       }
-
-      > a {
-        align-self: flex-start
-      }
-    }
-
-    > img {
-      min-height: 500px;
     }
   }
 `

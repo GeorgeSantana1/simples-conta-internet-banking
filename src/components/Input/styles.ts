@@ -22,6 +22,13 @@ export const InputContainer = styled.div`
     width: 230px;
     height: 45px;
     padding-left: 15px;
+    @media (max-width: 800px) {
+      width: 180px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 230px;
   }
 `
 
