@@ -12,7 +12,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 55%;
     justify-content: space-around;
 
     @media (min-width: 800px) {
@@ -42,8 +42,9 @@ export const SignInButton = styled.div`
   width: 85px;
   cursor: pointer;
   transition: 0.3s;
-  border: 2px solid #0c78ac;
+  border: 2px solid #339ED0;
   border-radius: 5px;
+  color: #339ED0;
 
   @media (min-width: 800px) {
     margin-right: 20px;
@@ -54,8 +55,6 @@ export const SignInButton = styled.div`
   }
 `
 
-export const SignInIcon = styled.div``
-
 export const RegisterButton = styled.div`
   display: flex;
   align-items: center;
@@ -64,7 +63,7 @@ export const RegisterButton = styled.div`
   width: 85px;
   transition: 0.3s;
   cursor: pointer;
-  background: #0c78ac;
+  background: #339ED0;
   border-radius: 5px;
   color: white;
 
@@ -73,4 +72,71 @@ export const RegisterButton = styled.div`
   }
 `
 
-export const RegisterIcon = styled.div``
+export const PresentationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+
+  > div {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > h1 {
+      font-size: 25px;
+      text-align: center;
+      line-height: 30px;
+
+      > span {
+        color: #339ED0;
+      }
+    }
+
+    > button {
+      background: #339ED0;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+      box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: 0.3s;
+
+      :hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  > img {
+    margin-top: 20px;
+  }
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    margin-top: 10px;
+    
+    > div {
+      width: 350px;
+
+      > h1 {
+        text-align: left;
+        font-size: 30px;
+      }
+
+      > button {
+        align-self: flex-start
+      }
+    }
+
+    > img {
+      min-height: 500px;
+    }
+  }
+`

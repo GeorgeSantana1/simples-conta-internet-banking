@@ -4,10 +4,11 @@ import {
   Container,
   AppTitle,
   SignInButton,
-  SignInIcon,
   RegisterButton,
-  RegisterIcon,
+  PresentationContainer,
 } from './styles'
+
+import landingPageAnimation from '../../assets/revenue-animate.svg'
 
 const LandingPage: React.FC = () => {
   return (
@@ -18,14 +19,28 @@ const LandingPage: React.FC = () => {
         <div className="buttons-container">
           <SignInButton>
             Entrar
-            <SignInIcon />
           </SignInButton>
           <RegisterButton>
             Cadastro
-            <RegisterIcon />
           </RegisterButton>
         </div>
       </header>
+
+      <PresentationContainer>
+        <div>
+          <h1>
+            Conta PJ
+            desenvolvida para
+            <span> acelerar</span> o seu negócio
+          </h1>
+
+          <button>
+            ABRIR MINHA CONTA PJ
+          </button>
+        </div>
+
+        <img src={landingPageAnimation} alt="Revenue"/>
+      </PresentationContainer>
     </Container>
   )
 }
