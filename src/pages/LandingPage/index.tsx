@@ -1,13 +1,33 @@
-import React from 'react';
+import React from 'react'
 
-import { Container } from './styles';
+import {
+  Container,
+  AppTitle,
+  SignInButton,
+  SignInIcon,
+  RegisterButton,
+  RegisterIcon,
+} from './styles'
 
 const LandingPage: React.FC = () => {
   return (
     <Container>
-      <h1>LandingPage</h1>
-    </Container>
-  );
-};
+      <header>
+        <AppTitle>Simples Conta</AppTitle>
 
-export default LandingPage;
+        <div className="buttons-container">
+          <SignInButton>
+            Entrar
+            <SignInIcon />
+          </SignInButton>
+          <RegisterButton>
+            Cadastro
+            <RegisterIcon />
+          </RegisterButton>
+        </div>
+      </header>
+    </Container>
+  )
+}
+
+export default LandingPage
