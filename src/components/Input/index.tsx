@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 
-import { Container } from './styles'
+import {
+  Container,
+  InputContainer,
+  ErrorContainer,
+  ErrorIcon
+} from './styles'
 
-const Input: React.FC = () => {
+interface Props {
+  name: string,
+  label: string,
+}
+
+type InputProps = JSX.IntrinsicElements['input'] & Props
+
+const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
   return (
     <Container>
-      <h1>Input</h1>
+      <label>{label}</label>
+      <InputContainer>
+        <input ref={inputRef} {...rest} />
+        <ErrorContainer>
+          <div className="error-container">
+            <p>Erro neste campo</p>
+          </div>
+          <ErrorIcon />
+        </ErrorContainer>
+      </InputContainer>
     </Container>
   )
 }
