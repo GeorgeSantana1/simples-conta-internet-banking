@@ -23,7 +23,7 @@ export const Container = styled.div`
   }
 `
 
-export const AppTitle = styled.div`
+export const AppTitle = styled.p`
   font-size: 25px;
   font-weight: lighter;
 

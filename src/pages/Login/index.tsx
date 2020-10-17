@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import Input from '../../components/Input'
@@ -16,6 +17,8 @@ interface Errors {
 }
 
 const Login: React.FC = () => {
+  const history = useHistory()
+  
   const [name, setName] = useState('')
   const [cnpj, setCnpj] = useState('')
 
@@ -45,6 +48,9 @@ const Login: React.FC = () => {
       })
 
       console.log("DATA: ", data)
+
+      history.push('/app')
+
       setErrors({})
     } catch(error) {
       if (error instanceof Yup.ValidationError) {
@@ -87,7 +93,7 @@ const Login: React.FC = () => {
           value={cnpj}
           onChange={e => maskCnpj(e.target.value)}
           error={errors?.cnpj}
-          placeholder="12.456.789/0001-10"
+          placeholder="12.345.678/0009-10"
         />
         <button type="submit">
           Acessar
