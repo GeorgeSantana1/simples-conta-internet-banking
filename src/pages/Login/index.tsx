@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const history = useHistory()
   
   const [name, setName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+  let [cnpj, setCnpj] = useState('')
 
   const [errors, setErrors] = useState<Errors>()
 
@@ -31,6 +31,12 @@ const Login: React.FC = () => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
+    cnpj = cnpj
+      .replace('-', '')
+      .replace('.', '')
+      .replace('.', '')
+      .replace('/', '')
+
     const data = {
       name, cnpj
     }
@@ -39,7 +45,7 @@ const Login: React.FC = () => {
       name: Yup.string().required('O nome é obrigatório'),
       cnpj: Yup.string()
         .required('O CNPJ é obrigatório')
-        .test('len', 'CNPJ inválido', val => val?.toString().length === 18)
+        .test('len', 'CNPJ inválido', val => val?.toString().length === 14)
     })
 
     try {

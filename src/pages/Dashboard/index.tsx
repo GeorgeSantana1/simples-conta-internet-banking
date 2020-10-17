@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
           <h1>R$ 999.999,99</h1>
         </BalanceContainer>
         <nav>
-          <NavItem>
+          <NavItem displayed={true}>
             <HomeIcon />
             Início
           </NavItem>

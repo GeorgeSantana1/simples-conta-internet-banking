@@ -33,7 +33,7 @@ export const BalanceContainer = styled.div`
   }
 `
 
-export const NavItem = styled.div`
+export const NavItem = styled.div<{ displayed?: boolean }>`
   display: flex;
   align-items: center;
   margin: 5px 0 5px 0;
@@ -41,6 +41,7 @@ export const NavItem = styled.div`
   border-radius: 8px 0 0 8px;
   transition: 0.3s;
   cursor: pointer;
+  box-shadow: ${props => props.displayed ? '0 0 15px rgba(51,158,208,0.5)' : 'none'};
 
   :hover {
     background: #eee;
