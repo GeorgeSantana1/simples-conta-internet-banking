@@ -75,12 +75,25 @@ export const PresentationContainer = styled.div`
   }
 `
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   padding: 20px 20px 35px 20px;
   border-radius: 8px;
   box-shadow: 0 0 25px rgba(0,0,0,0.2);
 
   > h1 {
     text-align: center;
+  }
+
+  > button {
+    width: 100%;
+    background: green;
+    border-radius: 6px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 16px;
   }
 `

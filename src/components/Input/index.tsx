@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 
 import {
   Container,
@@ -10,11 +10,12 @@ import {
 interface Props {
   name: string,
   label: string,
+  error?: string
 }
 
 type InputProps = JSX.IntrinsicElements['input'] & Props
 
-const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
+const Input: React.FC<InputProps> = ({ name, label, error, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (
@@ -22,12 +23,14 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
       <label>{label}</label>
       <InputContainer>
         <input ref={inputRef} {...rest} />
-        <ErrorContainer>
-          <div className="error-container">
-            <p>Erro neste campo</p>
-          </div>
-          <ErrorIcon />
-        </ErrorContainer>
+        {error && (
+          <ErrorContainer>
+            <div className="error-container">
+              <p>{error}</p>
+            </div>
+            <ErrorIcon />
+          </ErrorContainer>
+        )}
       </InputContainer>
     </Container>
   )

@@ -41,7 +41,8 @@ export const ErrorContainer = styled.div`
     padding: 5px;
     font-size: 14px;
     border-radius: 4px;
-    background: green;
+    background: #b22;
+    color: white;
     position: absolute;
     bottom: 30px;
     left: -20px;
@@ -56,7 +57,8 @@ export const ErrorContainer = styled.div`
 `
 
 export const ErrorIcon = styled(IoIosAlert)`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-right: 10px;
+  color: #b22;
 `
