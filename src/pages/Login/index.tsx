@@ -44,6 +44,7 @@ const Login: React.FC = () => {
         abortEarly: false
       })
 
+      console.log("DATA: ", data)
       setErrors({})
     } catch(error) {
       if (error instanceof Yup.ValidationError) {
@@ -78,6 +79,7 @@ const Login: React.FC = () => {
           label="Nome da empresa"
           onChange={e => setName(e.target.value)}
           error={errors?.name}
+          placeholder="Empresa S/A"
         />
         <Input
           name="cnpj"
@@ -85,9 +87,10 @@ const Login: React.FC = () => {
           value={cnpj}
           onChange={e => maskCnpj(e.target.value)}
           error={errors?.cnpj}
+          placeholder="12.456.789/0001-10"
         />
         <button type="submit">
-          Entrar
+          Acessar
         </button>
       </InputContainer>
     </Container>

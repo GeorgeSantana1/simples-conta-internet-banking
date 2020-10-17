@@ -76,7 +76,7 @@ export const PresentationContainer = styled.div`
 `
 
 export const InputContainer = styled.form`
-  padding: 20px 20px 35px 20px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 25px rgba(0,0,0,0.2);
 
@@ -86,7 +86,7 @@ export const InputContainer = styled.form`
 
   > button {
     width: 100%;
-    background: green;
+    background: #339ED0;
     border-radius: 6px;
     height: 45px;
     display: flex;
@@ -95,5 +95,11 @@ export const InputContainer = styled.form`
     margin-top: 20px;
     color: white;
     font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    :hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.5)
+    }
   }
 `

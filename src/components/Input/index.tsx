@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({ name, label, error, ...rest }) => {
   return (
     <Container>
       <label>{label}</label>
-      <InputContainer>
+      <InputContainer error={error ? true : false}>
         <input ref={inputRef} {...rest} />
         {error && (
           <ErrorContainer>

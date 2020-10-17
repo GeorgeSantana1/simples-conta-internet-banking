@@ -9,19 +9,23 @@ export const Container = styled.div`
   }
 `
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ error?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #eee;
   width: 275px;
   border-radius: 5px;
+  transition: border 0.3s;
+  border: ${props => props.error ? '1px solid #b22' : 'none'};
 
   > input {
     font-size: 16px;
     width: 230px;
     height: 45px;
     padding-left: 15px;
+    transition: 0.2s;
+
     @media (max-width: 800px) {
       width: 180px;
     }
@@ -43,10 +47,10 @@ export const ErrorContainer = styled.div`
     border-radius: 4px;
     background: #b22;
     color: white;
+    text-align: right;
     position: absolute;
     bottom: 30px;
-    left: -20px;
-    right: -20px;
+    right: 0;
   }
 
   :hover {
