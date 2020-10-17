@@ -2,7 +2,7 @@ import React from 'react'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Home from './pages/Home'
+import Home from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Home from '../../components/Home'
+
 import {
   Container,
   Title,
@@ -10,7 +12,7 @@ import {
   AccountIcon,
 } from './styles'
 
-const Home: React.FC = () => {
+const Dashboard: React.FC = () => {
   return (
     <Container>
       <aside>
@@ -34,8 +36,10 @@ const Home: React.FC = () => {
           </NavItem>
         </nav>
       </aside>
+
+      <Home />
     </Container>
   )
 }
 
-export default Home
+export default Dashboard
