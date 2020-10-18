@@ -5,34 +5,10 @@ import {
   Container,
   ChartContainer,
   InfoContainer,
+  EnterpriseName
 } from './styles'
 
 import transactions from '../../mocks/transactions.json'
-
-interface Enterprise {
-  empresaId: number,
-  nomeEmpresa: string,
-  cnpj: string,
-  dadosBancario: {
-    banco: number,
-    bancoNome: string,
-    agencia: number,
-    conta: number,
-    digitoConta: string
-  },
-  saldo: number
-}
-
-interface Transaction {
-  empresaId: number,
-  dataTransacao: string,
-  valor: number,
-  finalCartao: null | string,
-  tipoTransacao: "PAY" | "CARD" | "TED_IN",
-  descricaoTransacao: string,
-  estabelecimento: string,
-  credito: boolean
-}
 
 const Home: React.FC = () => {
   const data = {
@@ -47,10 +23,23 @@ const Home: React.FC = () => {
     }),
     datasets: [
       {
-        label: 'Ganho',
-        backgroundColor: '#339ED0',
-        data: transactions.map(transaction => transaction.valor)
+        label: 'Transações',
+        backgroundColor: 'red',
+        data: transactions.map(transaction => {
+          if (transaction.empresaId === 1) {
+            return transaction.valor
+          }
+        })
       },
+      {
+        label: 'Recebidos',
+        backgroundColor: 'green',
+        data: transactions.map(transaction => {
+          if (transaction.empresaId === 1 && transaction.tipoTransacao === 'SLIP_IN' || 'TED_IN') {
+            return transaction.valor
+          }
+        })
+      }
     ]
   }
 
@@ -59,23 +48,29 @@ const Home: React.FC = () => {
       <ChartContainer>
         <Line
           data={data}
-          height={300}
-          width={800}
+          width={(window.innerWidth) * 0.5}
+          height={(window.innerHeight) * 0.3}
           options={{
-            title: {
-              display: true,
-              text: 'Extrato',
-              fontSize: 20
-            },
             legend: {
               display: true,
-              position: 'right'
             }
           }}
         />
       </ChartContainer>
 
-      <InfoContainer></InfoContainer>
+      <InfoContainer>
+        <h1>Sobre</h1>
+        <EnterpriseName>Empresa UM</EnterpriseName>
+        <p>
+          CNPJ: 00.000.000/0000-00
+        </p>
+        <p>
+          Agência: 1
+        </p>
+        <p>
+          Conta: 678956
+        </p>
+      </InfoContainer>
     </Container>
   )
 }

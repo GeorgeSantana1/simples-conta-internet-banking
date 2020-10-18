@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
+import AccountStatement from '../../components/AccountStatement'
 import Home from '../../components/Home'
 
 import {
@@ -13,6 +14,8 @@ import {
 } from './styles'
 
 const Dashboard: React.FC = () => {
+  const [pageDisplayed, setPageDisplayed] = useState('AccountStatement')
+
   return (
     <Container>
       <aside>
@@ -22,11 +25,17 @@ const Dashboard: React.FC = () => {
           <h1>R$ 999.999,99</h1>
         </BalanceContainer>
         <nav>
-          <NavItem displayed={true}>
+          <NavItem
+            displayed={pageDisplayed === 'Home'}
+            onClick={() => { setPageDisplayed('Home') }}
+          >
             <HomeIcon />
             Início
           </NavItem>
-          <NavItem>
+          <NavItem
+            displayed={pageDisplayed === 'AccountStatement'}
+            onClick={() => { setPageDisplayed('AccountStatement') }}
+          >
             <FileIcon />
             Extrato da conta
           </NavItem>
@@ -37,7 +46,8 @@ const Dashboard: React.FC = () => {
         </nav>
       </aside>
 
-      <Home />
+      {pageDisplayed === 'Home' && <Home />}
+      {pageDisplayed === 'AccountStatement' && <AccountStatement />}
     </Container>
   )
 }

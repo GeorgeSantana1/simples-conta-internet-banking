@@ -41,10 +41,10 @@ export const NavItem = styled.div<{ displayed?: boolean }>`
   border-radius: 8px 0 0 8px;
   transition: 0.3s;
   cursor: pointer;
-  box-shadow: ${props => props.displayed ? '0 0 15px rgba(51,158,208,0.5)' : 'none'};
+  background: ${props => props.displayed ? 'rgba(51,158,208,0.2)' : "none"};
 
   :hover {
-    background: #eee;
+    background: rgba(51,158,208,0.2);
   }
 `
 
