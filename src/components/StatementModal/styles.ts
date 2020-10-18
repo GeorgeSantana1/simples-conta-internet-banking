@@ -45,6 +45,13 @@ export const Card  = styled.div`
   width: 375px;
   background: #333;
   height: 200px;
+  box-shadow: 20px 20px 40px rgba(0,0,0,0.2);
+
+  .bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `
 
 export const AppTitle = styled.p`
@@ -64,9 +71,14 @@ export const Platform  = styled.div``
 
 export const CardNumber = styled.p`
   font-size: 18px;
-  margin-left: 30px;
   margin-top: 30px;
-  font-family: JetBrains Mono;
+  text-align: center;
   color: lightgray;
-  letter-spacing: 5px;
+  letter-spacing: 8px;
+  user-select: none;
+`
+
+export const ShelfLife = styled.p`
+  color: white;
+  margin-left: 30px;
 `

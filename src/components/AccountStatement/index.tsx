@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Container,
@@ -10,14 +10,36 @@ import {
 import transactions from '../../mocks/transactions.json'
 import StatementModal from '../StatementModal'
 
+interface Transaction {
+  empresaId: number,
+  dataTransacao: string,
+  valor: number,
+  finalCartao: string | null,
+  tipoTransacao: string,
+  descricaoTransacao: string,
+  estabelecimento: string | null,
+  credito: boolean
+}
+
 const AccountStatement: React.FC = () => {
+  const [actualTransaction, setActualTransaction] = useState<Transaction>(transactions[0])
+  const [showModal, setShowModal] = useState(false)
+
+  function toggleModal(transaction: Transaction) {
+    setActualTransaction(transaction)
+    setShowModal(true)
+  }
+
   return (
     <Container>
-      <StatementModal />
+      <StatementModal show={showModal} transaction={actualTransaction} />
       <h1>Extrato</h1>
       <StatementContainer>
         {transactions.map(transaction => (
-          <StatementItem inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}>
+          <StatementItem
+            inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}
+            onClick={() => toggleModal(transaction)}
+          >
             <div className="left-side">
               <ColorBall className="color-ball" />
               <div>

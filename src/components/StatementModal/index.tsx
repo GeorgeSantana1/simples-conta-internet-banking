@@ -13,25 +13,43 @@ import {
   VisaIcon,
   Platform,
   CardNumber,
+  ShelfLife
 } from './styles'
 
 import visaIcon from '../../assets/visa.svg'
 
-const StatementModal: React.FC = () => {
+interface Props {
+  show: boolean,
+  transaction: {
+    empresaId: number,
+		dataTransacao: string,
+		valor: number,
+		finalCartao: string | null,
+		tipoTransacao: string,
+		descricaoTransacao: string,
+		estabelecimento: string | null,
+		credito: boolean
+  }
+}
+
+const StatementModal: React.FC<Props> = ({ show, transaction }) => {
   return (
-    <Container show={true}>
+    <Container show={show}>
       <Title inOrOut="in">
         <ColorBall className="color-ball" />
-        <h1>Compra com cartão de crédito</h1>
+        <h1>{transaction.descricaoTransacao}</h1>
       </Title>
       <Description>
-        <Date>09/10/2020</Date>
-        <Value>R$ 5000,00</Value>
-        <Platform>FACEBOOK</Platform>
+        <Date>{transaction.dataTransacao}</Date>
+        <Value>R$ {String(transaction.valor).replace('.', ',')}</Value>
+        <Platform>{transaction.estabelecimento}</Platform>
         <Card>
           <AppTitle>Simples Conta</AppTitle>
-          <CardNumber>•••• •••• •••• 1234</CardNumber>
-          <VisaIcon src={visaIcon} />
+          <CardNumber>•••• •••• •••• {transaction.finalCartao}</CardNumber>
+          <div className="bottom-container">
+            <ShelfLife>05/2023</ShelfLife>
+            <VisaIcon src={visaIcon} />
+          </div>
         </Card>
       </Description>
     </Container>
