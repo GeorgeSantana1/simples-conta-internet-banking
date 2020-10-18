@@ -69,7 +69,7 @@ export const StatementItem = styled.div<{ inOrOut?: 'in' | 'out' }>`
   }
 
   :hover {
-    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.15);
   }
 `
 

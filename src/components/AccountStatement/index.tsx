@@ -8,10 +8,12 @@ import {
 } from './styles'
 
 import transactions from '../../mocks/transactions.json'
+import StatementModal from '../StatementModal'
 
 const AccountStatement: React.FC = () => {
   return (
     <Container>
+      <StatementModal />
       <h1>Extrato</h1>
       <StatementContainer>
         {transactions.map(transaction => (
