@@ -53,6 +53,10 @@ const Dashboard: React.FC = () => {
             </NavItem>
             <NavItem>
               <AccountIcon />
+              Cartões
+            </NavItem>
+            <NavItem>
+              <AccountIcon />
               Conta
             </NavItem>
           </nav>
