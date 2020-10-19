@@ -11,6 +11,8 @@ import {
 
 import transactionsJson from '../../mocks/transactions.json'
 
+import { cnpjMask } from '../../utils/masks'
+
 interface Transaction {
   empresaId: number,
   dataTransacao: string,
@@ -23,11 +25,22 @@ interface Transaction {
 }
 
 interface Enterprise {
-  empresaId: 2,
+  empresaId: number,
+  nomeEmpresa: string,
+  cnpj: string,
+  dadosBancario: {
+    banco: number,
+    bancoNome: string,
+    agencia: number,
+    conta: number,
+    digitoConta: string
+  },
+  saldo: number
 }
 
 const Home: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [enterprise, setEnterprise] = useState<Enterprise>()
 
   const data: ChartData<Chart.ChartData> = {
     labels: transactions.map((transaction: Transaction) => {
@@ -68,6 +81,7 @@ const Home: React.FC = () => {
 
     const transactions: Transaction[] = transactionsJson.filter(transaction => transaction.empresaId === enterprise.empresaId)
 
+    setEnterprise(enterprise)
     setTransactions(transactions.reverse())
   }, [])
 
@@ -90,15 +104,15 @@ const Home: React.FC = () => {
 
       <InfoContainer>
         <h1>Sobre</h1>
-        <EnterpriseName>Empresa UM</EnterpriseName>
+        <EnterpriseName>{enterprise?.nomeEmpresa}</EnterpriseName>
         <p>
-          CNPJ: 00.000.000/0000-00
+          CNPJ: {cnpjMask(String(enterprise?.cnpj))}
         </p>
         <p>
-          Agência: 1
+          Agência: 000{String(enterprise?.dadosBancario.agencia)}
         </p>
         <p>
-          Conta: 678956
+          Conta: {String(enterprise?.dadosBancario.conta)}
         </p>
       </InfoContainer>
     </Container>

@@ -7,7 +7,7 @@ export const Container = styled.div`
   padding-left: 50px;
 
   > h1 {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 `
 

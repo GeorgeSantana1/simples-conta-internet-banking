@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
 
@@ -16,9 +16,24 @@ import {
   ExitIcon,
 } from './styles'
 
+interface Enterprise {
+  empresaId: number,
+  nomeEmpresa: string,
+  cnpj: string,
+  dadosBancario: {
+    banco: number,
+    bancoNome: string,
+    agencia: number,
+    conta: number,
+    digitoConta: string
+  },
+  saldo: number
+}
+
 const Dashboard: React.FC = () => {
   const history = useHistory()
 
+  const [enterprise, setEnterprise] = useState<Enterprise>()
   const [pageDisplayed, setPageDisplayed] = useState('Home')
 
   function logOut() {
@@ -27,6 +42,12 @@ const Dashboard: React.FC = () => {
     history.push('/')
   }
 
+  useEffect(() => {
+    const enterprise = JSON.parse(String(localStorage.getItem('enterprise')))
+
+    setEnterprise(enterprise)
+  }, [])
+
   return (
     <Container>
       <aside>
@@ -34,7 +55,7 @@ const Dashboard: React.FC = () => {
           <Title>Simples Conta</Title>
           <BalanceContainer>
             <p>Saldo bancário</p>
-            <h1>R$ 999.999,99</h1>
+            <h1>R$ {enterprise?.saldo}</h1>
           </BalanceContainer>
           <nav>
             <NavItem
