@@ -8,14 +8,13 @@ import {
 } from './styles'
 
 interface Props {
-  name: string,
   label: string,
   error?: string
 }
 
 type InputProps = JSX.IntrinsicElements['input'] & Props
 
-const Input: React.FC<InputProps> = ({ name, label, error, ...rest }) => {
+const Input: React.FC<InputProps> = ({ label, error, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (

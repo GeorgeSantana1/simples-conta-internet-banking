@@ -26,8 +26,6 @@ const AccountStatement: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [transaction, setTransaction] = useState<Transaction[]>([])
 
-  console.log(transaction)
-
   const [containerHover, setContainerHover] = useState<any>('all')
 
   function toggleModal(transaction: Transaction) {

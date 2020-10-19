@@ -79,6 +79,10 @@ export const InputContainer = styled.form`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   > h1 {
     text-align: center;

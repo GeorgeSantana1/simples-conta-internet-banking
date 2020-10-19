@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+
+import { Link, useHistory } from 'react-router-dom'
 
 import {
   Container,
@@ -12,6 +13,16 @@ import {
 import landingPageAnimation from '../../assets/revenue-animate.svg'
 
 const LandingPage: React.FC = () => {
+  const history = useHistory()
+
+  useEffect(() => {
+    const enterprise = localStorage.getItem('enterprise')
+
+    if (enterprise !== null) {
+      history.push('/app')
+    }
+  }, [history])
+
   return (
     <Container>
       <header>

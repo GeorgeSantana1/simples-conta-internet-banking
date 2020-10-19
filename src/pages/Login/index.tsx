@@ -1,4 +1,5 @@
-import React, { FormEvent, useState } from 'react'
+/* eslint-disable no-throw-literal */
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup'
 
@@ -11,16 +12,18 @@ import {
   PresentationContainer
 } from './styles'
 
+import enterprises from '../../mocks/enterprises.json'
+
 interface Errors {
-  name?: string,
-  cnpj?: string
+  [key: string]: string
 }
 
 const Login: React.FC = () => {
   const history = useHistory()
-  
-  const [name, setName] = useState('')
-  let [cnpj, setCnpj] = useState('')
+  const [agency, setAgency] = useState<string | undefined>()
+  const [account, setAccount] = useState<string | undefined>()
+  const [digit, setDigit] = useState<string | undefined>()
+  const [cnpj, setCnpj] = useState<string | undefined>()
 
   const [errors, setErrors] = useState<Errors>()
 
@@ -31,21 +34,26 @@ const Login: React.FC = () => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
-    cnpj = cnpj
-      .replace('-', '')
-      .replace('.', '')
-      .replace('.', '')
-      .replace('/', '')
-
     const data = {
-      name, cnpj
+      agency,
+      account,
+      digit,
+      cnpj
     }
 
     const scheme = Yup.object().shape({
-      name: Yup.string().required('O nome é obrigatório'),
+      agency: Yup.string()
+        .required('Agência é obrigatória')
+        .test('len', 'Agência inválida', val => val?.toString().length === 4),
+      account: Yup.string()
+        .required('A conta é obrigatório')
+        .test('len', 'Conta inválida', val => val?.toString().length === 6),
+      digit: Yup.string()
+        .required('Dígito obrigatório')
+        .test('len', 'Dígito inválido', val => val?.toString().length === 1),
       cnpj: Yup.string()
         .required('O CNPJ é obrigatório')
-        .test('len', 'CNPJ inválido', val => val?.toString().length === 14)
+        .test('len', 'CNPJ inválido', val => val?.toString().length === 18)
     })
 
     try {
@@ -53,23 +61,89 @@ const Login: React.FC = () => {
         abortEarly: false
       })
 
-      console.log("DATA: ", data)
+      const replacedCnpj = cnpj?.replace('.', '')
+        .replace('.', '')
+        .replace('/', '')
+        .replace('-', '')
+
+      console.log({
+        replacedCnpj,
+        agency,
+        account,
+        digit
+      })
+
+      const enterprise = enterprises.filter(enterprises =>
+        enterprises.cnpj === replacedCnpj &&
+        enterprises.dadosBancario.agencia === Number(agency) &&
+        enterprises.dadosBancario.conta === Number(account) &&
+        enterprises.dadosBancario.digitoConta === digit
+      )
+
+      if (!enterprise) {
+        throw {
+          name: "EnterpriseNotFoundError",
+          inner: [
+            {
+              name: 'EnterpriseNotFoundError',
+              message: 'Empresa não encontrada',
+              path: 'enterpriseNotFoundError'
+            }
+          ]
+        }
+      }
+
+      localStorage.setItem('isSigned', 'isSigned')
+      localStorage.setItem('enterprise', JSON.stringify(enterprise))
 
       history.push('/app')
 
       setErrors({})
     } catch(error) {
       if (error instanceof Yup.ValidationError) {
-        const validationErrors: any = {};
+        const validationErrors: Errors = {}
+        console.log(error)
 
-        error.inner.forEach((e: any) => {
+        error.inner.forEach((e: Yup.ValidationError) => {
           validationErrors[e.path] = e.message
         })
+
+        setErrors(validationErrors)
+      } else {
+        const validationErrors: Errors = {}
+
+        error.inner.forEach((e: Yup.ValidationError) => {
+          validationErrors[e.path] = e.message
+        })
+
+        console.log(validationErrors)
 
         setErrors(validationErrors)
       }
     }
   }
+
+  function onlyNumber(event: any) {
+    var key = event.keyCode || event.which
+
+    key = String.fromCharCode(key)
+
+    var regex = /^[0-9.]+$/
+
+    if(!regex.test(key)) {
+        event.returnValue = false
+
+        if(event.preventDefault) event.preventDefault()
+    }
+  }
+
+  useEffect(() => {
+    const enterprise = localStorage.getItem('enterprise')
+
+    if (enterprise !== null) {
+      history.push('/app')
+    }
+  }, [history])
 
   return (
     <Container>
@@ -86,19 +160,37 @@ const Login: React.FC = () => {
 
       <InputContainer onSubmit={handleSubmit}>
         <h1>Entrar</h1>
+        <div className="account-info-container">
+          <Input
+            label="Agência"
+            onChange={e => setAgency(e.target.value)}
+            error={errors?.agency || errors?.enterpriseNotFoundError}
+            placeholder="0001"
+            maxLength={4}
+            onKeyPress={onlyNumber}
+          />
+          <Input
+            label="Conta"
+            onChange={e => setAccount(e.target.value)}
+            error={errors?.account || errors?.enterpriseNotFoundError}
+            placeholder="123456"
+            maxLength={6}
+            onKeyPress={onlyNumber}
+          />
+          <Input
+            label="Dígito"
+            onChange={e => setDigit(e.target.value)}
+            error={errors?.digit || errors?.enterpriseNotFoundError}
+            placeholder="1"
+            maxLength={1}
+            onKeyPress={onlyNumber}
+          />
+        </div>
         <Input
-          name="name"
-          label="Nome da empresa"
-          onChange={e => setName(e.target.value)}
-          error={errors?.name}
-          placeholder="Empresa S/A"
-        />
-        <Input
-          name="cnpj"
           label="CNPJ"
           value={cnpj}
           onChange={e => maskCnpj(e.target.value)}
-          error={errors?.cnpj}
+          error={errors?.cnpj || errors?.enterpriseNotFoundError}
           placeholder="12.345.678/0009-10"
         />
         <button type="submit">

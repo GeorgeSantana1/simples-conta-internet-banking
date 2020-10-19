@@ -21,7 +21,7 @@ export const InputContainer = styled.div<{ error?: boolean }>`
 
   > input {
     font-size: 16px;
-    width: 230px;
+    width: 250px;
     height: 45px;
     padding-left: 15px;
     transition: 0.2s;
