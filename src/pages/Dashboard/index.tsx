@@ -19,7 +19,7 @@ import {
 const Dashboard: React.FC = () => {
   const history = useHistory()
 
-  const [pageDisplayed, setPageDisplayed] = useState('AccountStatement')
+  const [pageDisplayed, setPageDisplayed] = useState('Home')
 
   function logOut() {
     localStorage.clear()

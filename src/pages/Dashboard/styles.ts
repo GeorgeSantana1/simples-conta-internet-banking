@@ -88,4 +88,5 @@ export const AccountIcon = styled(FiUsers)`
 export const ExitIcon = styled(FiPower)`
   ${iconCss}
   margin-right: 0;
+  color: red;
 `

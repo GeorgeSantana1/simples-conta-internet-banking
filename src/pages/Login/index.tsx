@@ -18,6 +18,20 @@ interface Errors {
   [key: string]: string
 }
 
+interface Enterprise {
+  empresaId: number,
+  nomeEmpresa: string,
+  cnpj: string,
+  dadosBancario: {
+    banco: number,
+    bancoNome: string,
+    agencia: number,
+    conta: number,
+    digitoConta: string
+  },
+  saldo: number
+}
+
 const Login: React.FC = () => {
   const history = useHistory()
   const [agency, setAgency] = useState<string | undefined>()
@@ -73,7 +87,7 @@ const Login: React.FC = () => {
         digit
       })
 
-      const enterprise = enterprises.filter(enterprises =>
+      const enterprise: Enterprise[] = enterprises.filter(enterprises =>
         enterprises.cnpj === replacedCnpj &&
         enterprises.dadosBancario.agencia === Number(agency) &&
         enterprises.dadosBancario.conta === Number(account) &&
@@ -94,7 +108,7 @@ const Login: React.FC = () => {
       }
 
       localStorage.setItem('isSigned', 'isSigned')
-      localStorage.setItem('enterprise', JSON.stringify(enterprise))
+      localStorage.setItem('enterprise', JSON.stringify(enterprise[0]))
 
       history.push('/app')
 
