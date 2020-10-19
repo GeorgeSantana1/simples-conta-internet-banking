@@ -21,6 +21,20 @@ interface Transaction {
   credito: boolean
 }
 
+interface Enterprise {
+  empresaId: 2,
+  nomeEmpresa: "EMPRESA DOIS S/A",
+  cnpj: "77253158000106",
+  dadosBancario: {
+    banco: 999,
+    bancoNome: "CONTA SIMPLES",
+    agencia: 1,
+    conta: 678956,
+    digitoConta: "1"
+  },
+  saldo: 25500.00
+}
+
 const AccountStatement: React.FC = () => {
   const [actualTransaction, setActualTransaction] = useState<Transaction>(transactions[0])
   const [showModal, setShowModal] = useState(false)
@@ -42,7 +56,9 @@ const AccountStatement: React.FC = () => {
   }
 
   useEffect(() => {
-    const filteredTransactions = transactions.filter(transaction => transaction.empresaId === 2)
+    const enterprise: Enterprise = JSON.parse(String(localStorage.getItem('enterprise')))
+
+    const filteredTransactions = transactions.filter(transaction => transaction.empresaId === enterprise.empresaId)
 
     setTransaction(filteredTransactions.reverse())
   }, [])

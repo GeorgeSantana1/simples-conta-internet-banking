@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FiHome, FiUsers, FiFileText } from 'react-icons/fi'
+import { FiHome, FiUsers, FiFileText, FiPower } from 'react-icons/fi'
 
 export const Container = styled.div`
   display: flex;
@@ -8,10 +8,28 @@ export const Container = styled.div`
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     padding: 20px 0 20px 20px;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     > nav {
       padding-top: 20px;
       border-top: 0.38px solid lightgray;
+    }
+
+    .exit-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      transition: 0.2s;
+      cursor: pointer;
+      
+      :hover {
+        box-shadow: 0 0 30px rgba(255,0,0,0.5)
+      }
     }
   }
 `
@@ -65,4 +83,9 @@ export const FileIcon = styled(FiFileText)`
 
 export const AccountIcon = styled(FiUsers)`
   ${iconCss}
+`
+
+export const ExitIcon = styled(FiPower)`
+  ${iconCss}
+  margin-right: 0;
 `
