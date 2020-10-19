@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Container,
@@ -24,31 +24,50 @@ interface Transaction {
 const AccountStatement: React.FC = () => {
   const [actualTransaction, setActualTransaction] = useState<Transaction>(transactions[0])
   const [showModal, setShowModal] = useState(false)
+  const [transaction, setTransaction] = useState<Transaction[]>([])
+
+  console.log(transaction)
+
+  const [containerHover, setContainerHover] = useState<any>('all')
 
   function toggleModal(transaction: Transaction) {
     setActualTransaction(transaction)
     setShowModal(true)
+    setContainerHover('none')
   }
 
+  function backdropPress() {
+    if (showModal) {
+      setShowModal(false)
+      setContainerHover('all')
+    }
+  }
+
+  useEffect(() => {
+    const filteredTransactions = transactions.filter(transaction => transaction.empresaId === 2)
+
+    setTransaction(filteredTransactions.reverse())
+  }, [])
+
   return (
-    <Container>
+    <Container onClick={backdropPress}>
       <StatementModal show={showModal} transaction={actualTransaction} />
       <h1>Extrato</h1>
-      <StatementContainer>
-        {transactions.map(transaction => (
+      <StatementContainer style={{ pointerEvents: containerHover }}>
+        {transaction.map(enterpriseTransaction => (
           <StatementItem
-            inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}
-            onClick={() => toggleModal(transaction)}
+            inOrOut={enterpriseTransaction.tipoTransacao === "SLIP_IN" || enterpriseTransaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}
+            onClick={() => toggleModal(enterpriseTransaction)}
           >
             <div className="left-side">
               <ColorBall className="color-ball" />
               <div>
-                <h1>{transaction.descricaoTransacao}</h1>
-                <p>{transaction.dataTransacao}</p>
+                <h1>{enterpriseTransaction.descricaoTransacao}</h1>
+                <p>{enterpriseTransaction.dataTransacao}</p>
               </div>
             </div>
             <div className="right-side">
-              <h1>{transaction.tipoTransacao === "SLIP_IN" || "TED_IN" ? '+' : '-'} R$ {String(transaction.valor).replace('.', ',')}</h1>
+              <h1>{enterpriseTransaction.tipoTransacao === "SLIP_IN" || enterpriseTransaction.tipoTransacao === "TED_IN" ? '+' : '-'} R$ {String(enterpriseTransaction.valor).replace('.', ',')}</h1>
             </div>
           </StatementItem>
         ))}

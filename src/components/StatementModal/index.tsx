@@ -35,22 +35,28 @@ interface Props {
 const StatementModal: React.FC<Props> = ({ show, transaction }) => {
   return (
     <Container show={show}>
-      <Title inOrOut="in">
+      <Title
+        inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}
+      >
         <ColorBall className="color-ball" />
         <h1>{transaction.descricaoTransacao}</h1>
       </Title>
-      <Description>
-        <Date>{transaction.dataTransacao}</Date>
-        <Value>R$ {String(transaction.valor).replace('.', ',')}</Value>
-        <Platform>{transaction.estabelecimento}</Platform>
-        <Card>
-          <AppTitle>Simples Conta</AppTitle>
-          <CardNumber>•••• •••• •••• {transaction.finalCartao}</CardNumber>
-          <div className="bottom-container">
-            <ShelfLife>05/2023</ShelfLife>
-            <VisaIcon src={visaIcon} />
-          </div>
-        </Card>
+      <Description inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}>
+        <div className="info-container">
+          <Date>{transaction.dataTransacao}</Date>
+          <Value className="value">R$ {String(transaction.valor).replace('.', ',')}</Value>
+          <Platform>{transaction.estabelecimento}</Platform>
+        </div>
+        {transaction.finalCartao !== null && (
+          <Card>
+            <AppTitle>Simples Conta</AppTitle>
+            <CardNumber>•••• •••• •••• {transaction.finalCartao}</CardNumber>
+            <div className="bottom-container">
+              <ShelfLife>05/2023</ShelfLife>
+              <VisaIcon src={visaIcon} />
+            </div>
+          </Card>
+        )}
       </Description>
     </Container>
   )

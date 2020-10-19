@@ -26,16 +26,36 @@ export const Title = styled.div<{ inOrOut?: 'in' | 'out' }>`
   }
 `
 
-export const Description = styled.div`
+export const Description = styled.div<{ inOrOut?: 'in' | 'out' }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .value {
+      color: ${props => props.inOrOut === 'in' ? 'green' : 'red'};
+    }
+  }
 `
 
-export const Date  = styled.div``
+export const Date  = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+`
 
-export const Value  = styled.div``
+export const Value  = styled.div`
+  font-size: 25px;
+  margin-right: 20px;
+  font-weight: 500;
+`
 
 export const Card  = styled.div`
   border-radius: 10px;

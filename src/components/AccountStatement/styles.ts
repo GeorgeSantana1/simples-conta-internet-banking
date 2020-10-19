@@ -18,6 +18,7 @@ export const StatementContainer = styled.div`
   height: 80vh;
   margin-bottom: 30px;
   overflow-y: auto;
+  padding-top: 30px;
   
   ::-webkit-scrollbar {
     width: 10px;
@@ -34,11 +35,12 @@ export const StatementContainer = styled.div`
 `
 
 export const StatementItem = styled.div<{ inOrOut?: 'in' | 'out' }>`
-  margin: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
   border-radius: 8px;
   transition: 0.3s;
   cursor: pointer;
-  padding: 10px;
+  padding: 15px 10px 15px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,6 +67,7 @@ export const StatementItem = styled.div<{ inOrOut?: 'in' | 'out' }>`
       font-size: 25px;
       color: ${props => props.inOrOut === 'in' ? 'green' : 'red'};
       margin-right: 20px;
+      font-weight: 500;
     }
   }
 
