@@ -112,7 +112,6 @@ const AccountStatement: React.FC = () => {
     if (enterprise === null) return history.push('/auth')
 
     const filteredTransactions = transactions.filter(transaction => filterData(transaction, enterprise))
-    console.log('AAAAAAAAAAAAAAAAA', filteredTransactions)
 
     if (filteredTransactions.length === 0) {
       setNoData(true)

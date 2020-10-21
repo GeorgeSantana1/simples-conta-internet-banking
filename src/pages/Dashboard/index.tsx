@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import AccountStatement from '../../components/AccountStatement'
+import Cards from '../../components/Cards'
 import Home from '../../components/Home'
 
 import {
@@ -12,6 +13,7 @@ import {
   NavItem,
   HomeIcon,
   FileIcon,
+  CardIcon,
   AccountIcon,
   ExitIcon,
 } from './styles'
@@ -34,7 +36,7 @@ const Dashboard: React.FC = () => {
   const history = useHistory()
 
   const [enterprise, setEnterprise] = useState<Enterprise>()
-  const [pageDisplayed, setPageDisplayed] = useState('AccountStatement')
+  const [pageDisplayed, setPageDisplayed] = useState('Cards')
 
   function logOut() {
     localStorage.clear()
@@ -72,11 +74,17 @@ const Dashboard: React.FC = () => {
               <FileIcon />
               Extrato da conta
             </NavItem>
-            <NavItem>
-              <AccountIcon />
+            <NavItem
+              displayed={pageDisplayed === 'Cards'}
+              onClick={() => { setPageDisplayed('Cards') }}
+            >
+              <CardIcon />
               Cartões
             </NavItem>
-            <NavItem>
+            <NavItem
+              displayed={pageDisplayed === 'Account'}
+              onClick={() => setPageDisplayed('Account')}
+            >
               <AccountIcon />
               Conta
             </NavItem>
@@ -89,6 +97,7 @@ const Dashboard: React.FC = () => {
 
       {pageDisplayed === 'Home' && <Home />}
       {pageDisplayed === 'AccountStatement' && <AccountStatement />}
+      {pageDisplayed === 'Cards' && <Cards />}
     </Container>
   )
 }

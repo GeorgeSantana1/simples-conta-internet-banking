@@ -23,10 +23,21 @@ export const InfoContainer = styled(ChartContainer)`
   margin-top: 20px;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
+  padding-left: 50px;
+
+  > h1 {
+    font-size: 30px;
+    font-weight: 200;
+  }
 `
 
-export const EnterpriseName = styled.h1`
-  font-size: 25px;
-  font-weight: 200;
+export const EnterpriseName = styled.p`
+  font-size: 20px;
+  font-weight: 800;
+
+  > p {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+  }
 `

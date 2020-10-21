@@ -95,15 +95,14 @@ const Home: React.FC = () => {
           options={{
             legend: {
               display: true,
-              position: 'right',
-
+              position: 'right'
             }
           }}
         />
       </ChartContainer>
 
       <InfoContainer>
-        <h1>Sobre</h1>
+        <h1>Sobre a empresa</h1>
         <EnterpriseName>{enterprise?.nomeEmpresa}</EnterpriseName>
         <p>
           CNPJ: {cnpjMask(String(enterprise?.cnpj))}

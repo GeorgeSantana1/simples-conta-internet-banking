@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FiHome, FiUsers, FiFileText, FiPower } from 'react-icons/fi'
+import { FiHome, FiUsers, FiFileText, FiPower, FiCreditCard } from 'react-icons/fi'
 
 export const Container = styled.div`
   display: flex;
@@ -60,6 +60,7 @@ export const NavItem = styled.div<{ displayed?: boolean }>`
   transition: 0.3s;
   cursor: pointer;
   background: ${props => props.displayed ? 'rgba(51,158,208,0.2)' : "none"};
+  user-select: none;
 
   :hover {
     background: rgba(51,158,208,0.2);
@@ -82,6 +83,10 @@ export const FileIcon = styled(FiFileText)`
 `
 
 export const AccountIcon = styled(FiUsers)`
+  ${iconCss}
+`
+
+export const CardIcon = styled(FiCreditCard)`
   ${iconCss}
 `
 
