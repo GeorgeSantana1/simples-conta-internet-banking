@@ -46,7 +46,7 @@ const AccountStatement: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [transaction, setTransaction] = useState<Transaction[]>([])
 
-  const [filters, setFilters] = useState<Filters>({ transactionType: 'ALL' })
+  const [filters, setFilters] = useState<Filters>({ transactionType: 'ALL', flag: 'credit' })
 
   const [containerHover, setContainerHover] = useState<any>('all')
 
@@ -63,24 +63,46 @@ const AccountStatement: React.FC = () => {
     }
   }
 
-  function filterData(transaction: Transaction, enterprise: Enterprise) {
-    if (filters.transactionType === 'SLIP_IN') {
+  const filterFunctions = {
+    SLIP_IN(transaction: Transaction, enterprise: Enterprise) {
+      console.log('SLIP_IN')
       return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'SLIP_IN'
-    }
+    },
 
-    if (filters.transactionType === 'TED_IN') {
-      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'TED_IN'
-    }
-
-    if (filters.transactionType === 'CARD') {
-      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'CARD'
-    }
-
-    if (filters.transactionType === 'PAY') {
+    PAY(transaction: Transaction, enterprise: Enterprise) {
+      console.log('PAY')
       return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'PAY'
-    }
+    },
 
-    return transaction.empresaId === enterprise.empresaId
+    TED_IN(transaction: Transaction, enterprise: Enterprise) {
+      console.log('TED_IN')
+      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'TED_IN'
+    },
+
+    CARD(transaction: Transaction, enterprise: Enterprise) {
+      console.log('CARD')
+      if (filters.flag === 'credit') {
+        return transaction.empresaId === enterprise.empresaId &&
+        transaction.tipoTransacao === 'CARD' &&
+        transaction.credito
+      } else if (filters.flag === 'debit') {
+        return transaction.empresaId === enterprise.empresaId &&
+        transaction.tipoTransacao === 'CARD' &&
+        !transaction.credito
+      } else return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'CARD'
+    },
+
+    ALL(transaction: Transaction, enterprise: Enterprise) {
+      console.log('ALL')
+      return transaction.empresaId === enterprise.empresaId
+    }
+  }
+
+  function filterData(transaction: Transaction, enterprise: Enterprise) {
+    // @ts-ignore
+    const filter = filterFunctions[filters.transactionType]
+
+    return filter(transaction, enterprise)
   }
 
   useEffect(() => {
