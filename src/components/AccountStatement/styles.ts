@@ -6,14 +6,17 @@ export const Container = styled.div`
   flex-direction: column;
   padding-left: 50px;
 
-  > h1 {
+  .top-container {
     margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 `
 
 export const StatementContainer = styled.div`
   margin-top: 10px;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 10px;
   height: 80vh;
   margin-bottom: 30px;
@@ -80,4 +83,13 @@ export const ColorBall = styled.div`
   width: 15px;
   height: 15px;
   border-radius: 50%;
+`
+
+export const FilterContainer = styled.div`
+  border: 1px solid lightgray;
+  border-radius: 5px;
+
+  > select {
+    padding: 10px;
+  }
 `

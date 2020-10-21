@@ -4,7 +4,8 @@ import {
   Container,
   StatementContainer,
   StatementItem,
-  ColorBall
+  ColorBall,
+  FilterContainer
 } from './styles'
 
 import transactions from '../../mocks/transactions.json'
@@ -35,10 +36,17 @@ interface Enterprise {
   saldo: 25500.00
 }
 
+interface Filters {
+  transactionType: "ALL" | "SLIP_IN" | "CARD" | "TED_IN" | "PAY",
+  flag?: 'credit' | 'debit',
+}
+
 const AccountStatement: React.FC = () => {
   const [actualTransaction, setActualTransaction] = useState<Transaction>(transactions[0])
   const [showModal, setShowModal] = useState(false)
   const [transaction, setTransaction] = useState<Transaction[]>([])
+
+  const [filters, setFilters] = useState<Filters>({ transactionType: 'ALL' })
 
   const [containerHover, setContainerHover] = useState<any>('all')
 
@@ -55,18 +63,58 @@ const AccountStatement: React.FC = () => {
     }
   }
 
+  function filterData(transaction: Transaction, enterprise: Enterprise) {
+    if (filters.transactionType === 'SLIP_IN') {
+      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'SLIP_IN'
+    }
+
+    if (filters.transactionType === 'TED_IN') {
+      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'TED_IN'
+    }
+
+    if (filters.transactionType === 'CARD') {
+      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'CARD'
+    }
+
+    if (filters.transactionType === 'PAY') {
+      return transaction.empresaId === enterprise.empresaId && transaction.tipoTransacao === 'PAY'
+    }
+
+    return transaction.empresaId === enterprise.empresaId
+  }
+
   useEffect(() => {
     const enterprise: Enterprise = JSON.parse(String(localStorage.getItem('enterprise')))
 
-    const filteredTransactions = transactions.filter(transaction => transaction.empresaId === enterprise.empresaId)
+    const filteredTransactions = transactions.filter(transaction => filterData(transaction, enterprise))
 
     setTransaction(filteredTransactions.reverse())
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters])
 
   return (
     <Container onClick={backdropPress}>
       <StatementModal show={showModal} transaction={actualTransaction} />
-      <h1>Extrato</h1>
+      <div className="top-container">
+        <h1>Extrato</h1>
+        <FilterContainer>
+          <select name="transaction-type" onChange={e => setFilters({ transactionType: e.target.value as Filters["transactionType"] })}>
+            <option value="ALL">Todos</option>
+            <option value="SLIP_IN">Depósito por boleto</option>
+            <option value="TED_IN">Transferência bancária</option>
+            <option value="PAY">Pagamento de boleto</option>
+            <option value="CARD">Pagamento no cartão</option>
+          </select>
+          {filters?.transactionType === 'CARD' && (
+            <select name="transaction-flag" id="yes" onChange={e => setFilters({
+              transactionType: filters.transactionType, flag: e.target.value as Filters["flag"]
+            })}>
+            <option value="credit">Crédito</option>
+              <option value="debit">Débito</option>
+            </select>
+          )}
+        </FilterContainer>
+      </div>
       <StatementContainer style={{ pointerEvents: containerHover }}>
         {transaction.map(enterpriseTransaction => (
           <StatementItem
