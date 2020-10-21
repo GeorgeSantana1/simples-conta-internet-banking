@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
-
 import {
   Container,
   ButtonsContainer,
@@ -14,9 +12,9 @@ const Cards: React.FC = () => {
       <h1>Seção em manutenção!</h1>
       <p>Em breve traremos novidades...</p>
       <ButtonsContainer>
-        <Link to="https://github.com/joaopaulo-ld/">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/joaopaulo-ld/simples-conta-internet-banking">
           <GitHubIcon />
-        </Link>
+        </a>
       </ButtonsContainer>
     </Container>
   )

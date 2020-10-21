@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FiHome, FiUsers, FiFileText, FiPower, FiCreditCard } from 'react-icons/fi'
+import { FiHome, FiFileText, FiPower, FiCreditCard } from 'react-icons/fi'
 
 export const Container = styled.div`
   display: flex;
@@ -79,10 +79,6 @@ export const HomeIcon = styled(FiHome)`
 `
 
 export const FileIcon = styled(FiFileText)`
-  ${iconCss}
-`
-
-export const AccountIcon = styled(FiUsers)`
   ${iconCss}
 `
 

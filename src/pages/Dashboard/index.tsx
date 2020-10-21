@@ -14,7 +14,6 @@ import {
   HomeIcon,
   FileIcon,
   CardIcon,
-  AccountIcon,
   ExitIcon,
 } from './styles'
 
@@ -80,13 +79,6 @@ const Dashboard: React.FC = () => {
             >
               <CardIcon />
               Cartões
-            </NavItem>
-            <NavItem
-              displayed={pageDisplayed === 'Account'}
-              onClick={() => setPageDisplayed('Account')}
-            >
-              <AccountIcon />
-              Conta
             </NavItem>
           </nav>
         </div>
