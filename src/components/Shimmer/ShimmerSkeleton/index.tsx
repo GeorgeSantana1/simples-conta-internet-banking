@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { Container } from './styles'
+import { ShimmerEffectBackground } from './styles'
 
-const ShimmerSkeleton: React.FC = () => {
+interface Props {
+  width: number | string;
+  height: number | string
+}
+
+const ShimmerSkeleton: React.FC<Props> = ({ width, height }) => {
   return (
-    <Container>
-      <h1>ShimmerSkeleton</h1>
-    </Container>
+    <ShimmerEffectBackground width={width} height={height} />
   )
 }
 
