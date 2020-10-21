@@ -80,13 +80,6 @@ const Login: React.FC = () => {
         .replace('/', '')
         .replace('-', '')
 
-      console.log({
-        replacedCnpj,
-        agency,
-        account,
-        digit
-      })
-
       const enterprise: Enterprise[] = enterprises.filter(enterprises =>
         enterprises.cnpj === replacedCnpj &&
         enterprises.dadosBancario.agencia === Number(agency) &&
@@ -94,20 +87,16 @@ const Login: React.FC = () => {
         enterprises.dadosBancario.digitoConta === digit
       )
 
-      if (!enterprise) {
-        throw {
-          name: "EnterpriseNotFoundError",
-          inner: [
-            {
-              name: 'EnterpriseNotFoundError',
-              message: 'Empresa não encontrada',
-              path: 'enterpriseNotFoundError'
-            }
-          ]
+      console.log('ENTERPRISEEEEE: ', enterprise)
+
+      if (enterprise.length === 0) {
+        const validationErrors: Errors = {
+          enterpriseNotFoundError: 'Empresa não encontrada'
         }
+
+        return setErrors(validationErrors)
       }
 
-      localStorage.setItem('isSigned', 'isSigned')
       localStorage.setItem('enterprise', JSON.stringify(enterprise[0]))
 
       history.push('/app')
@@ -123,17 +112,7 @@ const Login: React.FC = () => {
         })
 
         setErrors(validationErrors)
-      } else {
-        const validationErrors: Errors = {}
-
-        error.inner.forEach((e: Yup.ValidationError) => {
-          validationErrors[e.path] = e.message
-        })
-
-        console.log(validationErrors)
-
-        setErrors(validationErrors)
-      }
+      } else console.log(error)
     }
   }
 
