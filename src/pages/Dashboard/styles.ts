@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FiHome, FiFileText, FiPower, FiCreditCard } from 'react-icons/fi'
+import { FiHome, FiFileText, FiPower, FiCreditCard, FiEye, FiEyeOff } from 'react-icons/fi'
 
 export const Container = styled.div`
   display: flex;
@@ -49,6 +49,14 @@ export const BalanceContainer = styled.div`
     font-size: 15px;
     color: gray;
   }
+
+  > h1 {
+    font-weight: 200;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `
 
 export const NavItem = styled.div<{ displayed?: boolean }>`
@@ -84,6 +92,28 @@ export const FileIcon = styled(FiFileText)`
 
 export const CardIcon = styled(FiCreditCard)`
   ${iconCss}
+`
+
+export const ShowIcon = styled(FiEye)`
+  ${iconCss}
+  transition: 0.2s;
+  cursor: pointer;
+  margin-right: 20px;
+
+  :hover {
+    opacity: 0.5;
+  }
+`
+
+export const HideIcon = styled(FiEyeOff)`
+  ${iconCss}
+  transition: 0.2s;
+  cursor: pointer;
+  margin-right: 20px;
+
+  :hover {
+    opacity: 0.5;
+  }
 `
 
 export const ExitIcon = styled(FiPower)`

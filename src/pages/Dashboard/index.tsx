@@ -15,6 +15,8 @@ import {
   FileIcon,
   CardIcon,
   ExitIcon,
+  ShowIcon,
+  HideIcon,
 } from './styles'
 
 interface Enterprise {
@@ -35,7 +37,9 @@ const Dashboard: React.FC = () => {
   const history = useHistory()
 
   const [enterprise, setEnterprise] = useState<Enterprise>()
-  const [pageDisplayed, setPageDisplayed] = useState('Cards')
+  const [pageDisplayed, setPageDisplayed] = useState('Home')
+
+  const [showData, setShowData] = useState(false)
 
   function logOut() {
     localStorage.clear()
@@ -56,7 +60,13 @@ const Dashboard: React.FC = () => {
           <Title>Simples Conta</Title>
           <BalanceContainer>
             <p>Saldo bancário</p>
-            <h1>R$ {enterprise?.saldo}</h1>
+            <h1>
+              R$ {showData ? `${enterprise?.saldo}` : '•••••••'}
+              {showData ? 
+                <HideIcon onClick={() => setShowData(oldValue => !oldValue)} /> : 
+                <ShowIcon onClick={() => setShowData(oldValue => !oldValue)} />
+              }
+            </h1>
           </BalanceContainer>
           <nav>
             <NavItem
