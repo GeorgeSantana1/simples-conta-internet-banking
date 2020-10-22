@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
   const history = useHistory()
 
   const [enterprise, setEnterprise] = useState<Enterprise>()
-  const [pageDisplayed, setPageDisplayed] = useState('AccountStatement')
+  const [pageDisplayed, setPageDisplayed] = useState('Home')
 
   const [showData, setShowData] = useState(false)
 

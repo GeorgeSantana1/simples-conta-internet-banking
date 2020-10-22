@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react'
-import { Line, Bar, ChartData } from 'react-chartjs-2'
+import { Bar, ChartData } from 'react-chartjs-2'
 
 import {
   Container,
