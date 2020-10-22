@@ -165,7 +165,17 @@ const AccountStatement: React.FC = () => {
                   <ColorBall className="color-ball" />
                   <div>
                     <h1>{enterpriseTransaction.descricaoTransacao}</h1>
-                    <p>{enterpriseTransaction.dataTransacao}</p>
+                    <p>
+                      {
+                        enterpriseTransaction.dataTransacao.split('T')[0].split('-')[2]
+                      }/
+                      {
+                        enterpriseTransaction.dataTransacao.split('T')[0].split('-')[1]
+                      }/
+                      {
+                        enterpriseTransaction.dataTransacao.split('T')[0].split('-')[0]
+                      }
+                    </p>
                   </div>
                 </div>
                 <div className="right-side">

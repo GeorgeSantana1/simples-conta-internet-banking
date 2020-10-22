@@ -43,7 +43,17 @@ const StatementModal: React.FC<Props> = ({ show, transaction }) => {
       </Title>
       <Description inOrOut={transaction.tipoTransacao === "SLIP_IN" || transaction.tipoTransacao === "TED_IN" ? 'in' : 'out'}>
         <div className="info-container">
-          <Date>{transaction.dataTransacao}</Date>
+          <Date>
+            {
+              transaction.dataTransacao.split('T')[0].split('-')[2]
+            }/
+            {
+              transaction.dataTransacao.split('T')[0].split('-')[1]
+            }/
+            {
+              transaction.dataTransacao.split('T')[0].split('-')[0]
+            }
+          </Date>
           <Value className="value">R$ {String(transaction.valor).replace('.', ',')}</Value>
           <Platform>{transaction.estabelecimento}</Platform>
         </div>

@@ -87,7 +87,10 @@ export const VisaIcon = styled.img`
   margin-right: 20px;
 `
 
-export const Platform  = styled.div``
+export const Platform  = styled.div`
+  font-size: 20px;
+  font-weight: 800;
+`
 
 export const CardNumber = styled.p`
   font-size: 18px;
