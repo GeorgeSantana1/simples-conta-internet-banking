@@ -40,6 +40,9 @@ $ git clone https://github.com/joaopaulo-ld/simples-conta-internet-banking
 - Start hacking on `localhost:3000`
 
 ## 👀 To implement
+- [ ] Improve the main input and output chart
+- [ ] Implement the shimmer effect on the components that needs to load data from mock files
+- [ ] Implement cryptography on localStorage items
 - [ ] Cards page (you can see a "maintenance" message on the page). the problem encountered was the possibility to filter the cards within the mocked data since the transactions are not grouped by company. But soon this feature will be finished.
 - [ ] Register page. The register functionality is not yet implemented due to the mock data being static.
 
